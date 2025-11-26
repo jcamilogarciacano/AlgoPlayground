@@ -1,12 +1,8 @@
-export type BubbleStep = {
-  type: 'compare' | 'swap' | 'done';
-  indices: [number, number];
-  arraySnapshot: number[];
-};
+import type { SortStep } from './types';
 
-export const generateBubbleSortSteps = (input: number[]): BubbleStep[] => {
+export const generateBubbleSortSteps = (input: number[]): SortStep[] => {
   const arr = [...input];
-  const steps: BubbleStep[] = [];
+  const steps: SortStep[] = [];
 
   for (let i = 0; i < arr.length; i += 1) {
     for (let j = 0; j < arr.length - 1 - i; j += 1) {

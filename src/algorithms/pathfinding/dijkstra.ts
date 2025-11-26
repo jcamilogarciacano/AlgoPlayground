@@ -1,5 +1,5 @@
-import { GridPoint } from './bfs';
+import type { CellCoord } from './types';
 
-export const dijkstra = (_start: GridPoint, _goal: GridPoint) => {
-  return { visited: [], path: [] as GridPoint[] };
+export const dijkstra = (_start: CellCoord, _goal: CellCoord) => {
+  return { visited: [], path: [] as CellCoord[] };
 };

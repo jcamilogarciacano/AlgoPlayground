@@ -5,16 +5,17 @@ export type Highlight = [number, number] | null;
 type SortingVisualizerProps = {
   values: number[];
   highlighted: Highlight;
+  algorithmName: string;
   stepInfo?: string;
 };
 
-const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ values, highlighted, stepInfo }) => {
+const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ values, highlighted, algorithmName, stepInfo }) => {
   const maxValue = Math.max(...values, 1);
 
   return (
     <div className="panel visualizer">
       <div className="visualizer-header">
-        <div className="visualizer-title">Bubble Sort</div>
+        <div className="visualizer-title">{algorithmName}</div>
         <div className="muted">{stepInfo ?? 'Ready to sort'}</div>
       </div>
       <div className="bars" aria-label="sorting bars">

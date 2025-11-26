@@ -1,25 +1,31 @@
 import React from 'react';
 
+export type SortingAlgorithmKey = 'bubble' | 'insertion';
+
 type SortingControlsProps = {
   isPlaying: boolean;
   speed: number;
   size: number;
+  algorithm: SortingAlgorithmKey;
   onRandomize: () => void;
   onPlayPause: () => void;
   onStep: () => void;
   onSpeedChange: (value: number) => void;
   onSizeChange: (value: number) => void;
+  onAlgorithmChange: (value: SortingAlgorithmKey) => void;
 };
 
 const SortingControls: React.FC<SortingControlsProps> = ({
   isPlaying,
   speed,
   size,
+  algorithm,
   onRandomize,
   onPlayPause,
   onStep,
   onSpeedChange,
   onSizeChange,
+  onAlgorithmChange,
 }) => {
   return (
     <div className="panel controls">
@@ -30,6 +36,14 @@ const SortingControls: React.FC<SortingControlsProps> = ({
       </div>
 
       <div className="sliders">
+        <label className="slider">
+          <span>Algorithm</span>
+          <select value={algorithm} onChange={(e) => onAlgorithmChange(e.target.value as SortingAlgorithmKey)}>
+            <option value="bubble">Bubble Sort</option>
+            <option value="insertion">Insertion Sort</option>
+          </select>
+        </label>
+
         <label className="slider">
           <span>Speed: {speed} ms</span>
           <input

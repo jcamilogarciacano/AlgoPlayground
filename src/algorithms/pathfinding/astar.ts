@@ -1,5 +1,5 @@
-import { GridPoint } from './bfs';
+import type { CellCoord } from './types';
 
-export const aStar = (_start: GridPoint, _goal: GridPoint) => {
-  return { visited: [], path: [] as GridPoint[] };
+export const aStar = (_start: CellCoord, _goal: CellCoord) => {
+  return { visited: [], path: [] as CellCoord[] };
 };

@@ -1,17 +1,36 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import SortingControls from '../components/sorting/SortingControls';
+import SortingControls, { SortingAlgorithmKey } from '../components/sorting/SortingControls';
 import SortingVisualizer, { Highlight } from '../components/sorting/SortingVisualizer';
-import { BubbleStep, generateBubbleSortSteps } from '../algorithms/sorting/bubbleSort';
+import { generateBubbleSortSteps } from '../algorithms/sorting/bubbleSort';
+import { generateInsertionSortSteps } from '../algorithms/sorting/insertionSort';
+import type { SortStep } from '../algorithms/sorting/types';
 
 const generateRandomArray = (size: number) => {
   return Array.from({ length: size }, () => Math.floor(Math.random() * 90) + 10);
 };
 
+const sortingAlgorithms: Record<
+  SortingAlgorithmKey,
+  { label: string; description: string; generate: (arr: number[]) => SortStep[] }
+> = {
+  bubble: {
+    label: 'Bubble Sort',
+    description: 'Compare neighbors and bubble the largest items toward the end of the array.',
+    generate: generateBubbleSortSteps,
+  },
+  insertion: {
+    label: 'Insertion Sort',
+    description: 'Grow a sorted prefix by inserting each element into its correct position.',
+    generate: generateInsertionSortSteps,
+  },
+};
+
 const SortingPage = () => {
+  const [algorithm, setAlgorithm] = useState<SortingAlgorithmKey>('bubble');
   const [arraySize, setArraySize] = useState(20);
   const [speed, setSpeed] = useState(400);
   const [values, setValues] = useState<number[]>(() => generateRandomArray(20));
-  const [steps, setSteps] = useState<BubbleStep[]>([]);
+  const [steps, setSteps] = useState<SortStep[]>([]);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [displayArray, setDisplayArray] = useState<number[]>(values);
   const [highlighted, setHighlighted] = useState<Highlight>(null);
@@ -19,14 +38,14 @@ const SortingPage = () => {
   const [stepInfo, setStepInfo] = useState('Ready to sort');
 
   useEffect(() => {
-    const nextSteps = generateBubbleSortSteps(values);
+    const nextSteps = sortingAlgorithms[algorithm].generate(values);
     setSteps(nextSteps);
     setCurrentStepIndex(0);
     setDisplayArray(values);
     setHighlighted(null);
     setIsPlaying(false);
     setStepInfo('Ready to sort');
-  }, [values]);
+  }, [algorithm, values]);
 
   const handleStep = useCallback(() => {
     setCurrentStepIndex((idx) => {
@@ -44,7 +63,9 @@ const SortingPage = () => {
           ? 'Sorted!'
           : step.type === 'swap'
             ? `Swapping indices ${step.indices[0]} and ${step.indices[1]}`
-            : `Comparing indices ${step.indices[0]} and ${step.indices[1]}`;
+            : step.type === 'insert'
+              ? `Inserting value at index ${step.indices[0]}`
+              : `Comparing indices ${step.indices[0]} and ${step.indices[1]}`;
       setStepInfo(description);
 
       const next = idx + 1;
@@ -100,25 +121,30 @@ const SortingPage = () => {
         <div>
           <p className="eyebrow">Visualization</p>
           <h2>Sorting Playground</h2>
-          <p className="muted">
-            Follow Bubble Sort as it compares neighbors and pushes the largest items to the end of the array.
-          </p>
+          <p className="muted">{sortingAlgorithms[algorithm].description}</p>
         </div>
-        <div className="chip">Bubble Sort</div>
+        <div className="chip">{sortingAlgorithms[algorithm].label}</div>
       </div>
 
       <SortingControls
         isPlaying={isPlaying}
         speed={speed}
         size={arraySize}
+        algorithm={algorithm}
         onRandomize={randomizeArray}
         onPlayPause={togglePlay}
         onStep={handleStepClick}
         onSpeedChange={setSpeed}
         onSizeChange={handleSizeChange}
+        onAlgorithmChange={(value) => setAlgorithm(value)}
       />
 
-      <SortingVisualizer values={displayArray} highlighted={highlighted} stepInfo={`${stepInfo} · ${progressText}`} />
+      <SortingVisualizer
+        values={displayArray}
+        highlighted={highlighted}
+        algorithmName={sortingAlgorithms[algorithm].label}
+        stepInfo={`${stepInfo} · ${progressText}`}
+      />
     </div>
   );
 };
