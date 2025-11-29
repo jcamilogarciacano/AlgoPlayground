@@ -222,6 +222,31 @@ a:hover {
   accent-color: #2563eb;
 }
 
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  min-width: 140px;
+}
+
+.input-group span {
+  font-size: 12px;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.input-group input {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #dbeafe;
+  background: white;
+  font-weight: 600;
+  color: #0f172a;
+  min-width: 120px;
+}
+
 .slider select {
   padding: 8px 10px;
   border-radius: 10px;
@@ -341,6 +366,96 @@ a:hover {
 .grid-cell.goal {
   background: #db2777;
   color: white;
+}
+
+.tree-visualizer {
+  overflow-x: auto;
+}
+
+.tree-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 4px;
+}
+
+.tree-level-grid {
+  display: grid;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.tree-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 40px;
+}
+
+.tree-node {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid #e2e8f0;
+  background: #f8fafc;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #0f172a;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tree-node.inserted {
+  background: #dcfce7;
+  border-color: #22c55e;
+  color: #166534;
+}
+
+.tree-node.deleted {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #991b1b;
+}
+
+.tree-node.current {
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+}
+
+.tree-placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px dashed #e2e8f0;
+  background: #f8fafc;
+  opacity: 0.65;
+}
+
+.tree-branches {
+  display: flex;
+  width: 100%;
+  gap: 6px;
+  height: 12px;
+}
+
+.tree-branches .branch {
+  flex: 1;
+  border-top: 1px solid #e2e8f0;
+  position: relative;
+}
+
+.tree-branches .branch.left {
+  border-left: 1px solid #e2e8f0;
+}
+
+.tree-branches .branch.right {
+  border-right: 1px solid #e2e8f0;
+}
+
+.tree-branches .branch.active {
+  border-color: #cbd5e1;
 }
 
 .legend {
