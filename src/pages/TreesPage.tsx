@@ -171,6 +171,15 @@ const TreesPage = () => {
         <div className="chip">BST</div>
       </div>
 
+      <div className="panel">
+        <h3>About this page</h3>
+        <p className="muted">
+          A Binary Search Tree keeps smaller values on the left and larger on the right, enabling fast lookups. Insert or
+          delete values to reshape the tree, and run a search to step through the nodes visited. Green highlights a fresh
+          insert, red a removed node, and orange marks the current search position.
+        </p>
+      </div>
+
       <div className="panel controls">
         <div className="control-row">
           <label className="input-group">

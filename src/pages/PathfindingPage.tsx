@@ -155,6 +155,15 @@ const PathfindingPage = () => {
         <div className="chip">BFS</div>
       </div>
 
+      <div className="panel">
+        <h3>About this page</h3>
+        <p className="muted">
+          Breadth-First Search (BFS) explores outward in waves to find the shortest path on an unweighted grid. Toggle
+          walls, then play or step through the search. Blue cells were visited, green marks the reconstructed path, dark
+          cells are walls, orange outline is the current node, and S/G mark start and goal.
+        </p>
+      </div>
+
       <div className="panel controls">
         <div className="control-row">
           <button className="btn" onClick={randomizeWalls}>Randomize walls</button>

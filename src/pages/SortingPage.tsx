@@ -126,6 +126,15 @@ const SortingPage = () => {
         <div className="chip">{sortingAlgorithms[algorithm].label}</div>
       </div>
 
+      <div className="panel">
+        <h3>About this page</h3>
+        <p className="muted">
+          Sorting algorithms reorder a list by comparing and moving values until everything is in place. Use the
+          controls to pick an algorithm, adjust speed, change array size, randomize values, and either autoplay or step
+          one comparison at a time.
+        </p>
+      </div>
+
       <SortingControls
         isPlaying={isPlaying}
         speed={speed}

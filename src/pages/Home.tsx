@@ -12,6 +12,19 @@ const Home = () => {
         </div>
       </section>
 
+      <div className="panel">
+        <h3>About this page</h3>
+        <p className="muted">
+          Jump into quick demos of classic algorithms. Each lab lets you play, pause, and step through logic to see
+          state changes in real time.
+        </p>
+        <div className="cta-row">
+          <Link className="btn" to="/sorting">Sorting lab</Link>
+          <Link className="btn" to="/pathfinding">Pathfinding lab</Link>
+          <Link className="btn" to="/trees">Tree explorer</Link>
+        </div>
+      </div>
+
       <section className="card-grid">
         <Link to="/sorting" className="feature-card">
           <h3>Sorting Visualizer</h3>
